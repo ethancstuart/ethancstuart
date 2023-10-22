@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="style.css" type="text/css">
   </head>
   <body>
-    <header>
+    <header class="shadow-header">
       <h1>Ethan Stuart</h1>
         <p>Email: ethan.c.stuart@gmail.com</p>
         <p>Phone: (415) 419-7630</p>
@@ -21,6 +21,8 @@
               <li><a href="python.html">Python</a></li>
               <li><a href="excel.html">Excel</a></li>
             </ul>
+          </li>
+        </ul>
       </nav>
     </header>
     <main>
@@ -83,10 +85,10 @@
       <p>Table: You have three tables: orders, order_items, and products. The orders table contains information about each order, including the order_id and the order_date. The order_items table contains information about each item in each order, including the order_id, the product_id, the quantity, and the price. The products table contains information about each product, including the product_id, the product_name, and the category_id.</p>
       <pre>
         <code class="sql">
-          SELECT 
+          SELECT
 	       categories.category_name,
 	       products.product_name,
-	         SUM(order_items.quantity) AStotal_quantity_sold
+	         SUM(order_items.quantity) AStotal_quantity_sold
           FROM orders
           JOIN order_items
 	       ON orders.order_id = order_items.order_id
