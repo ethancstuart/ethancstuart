@@ -1,0 +1,157 @@
+body {
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  color: #ffffff;
+  background-color: #8D8741; 
+}
+
+header {
+  background-color: transparent; 
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 48px; /* Made it larger for emphasis */
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+section {
+  margin: 40px 0;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #ffffff; /* Light color to contrast with the dark background */
+}
+
+/* Navbar base styling */
+nav {
+  position: absolute;
+  top: 20px;  /* Adjust this value to move navbar up or down */
+  right: 20px;  /* Adjust this value to move navbar left or right */
+  font-size: 14px;  /* Small font size for minimal look */
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent; /* To make sure it doesn't have a background color */
+}
+
+nav li {
+  margin: 0 5px;  /* Spacing between nav items */
+  position: relative;  /* To position the dropdown menu */
+  padding: 5px;  /* Small padding for minimal look */
+  background-color: transparent;  /* To ensure no background color */
+  border: none;  /* No border to ensure minimal look */
+}
+
+nav a {
+  text-decoration: none;
+  color: white;  /* Adjust to match your design */
+}
+
+/* Dropdown styling */
+nav li ul {
+  display: none;  /* Hidden by default */
+  position: absolute;
+  top: 100%;  /* Positioned just below the parent nav item */
+  right: 0;  /* Aligned to the right of the parent nav item */
+  border: 1px solid white;  /* Adjust border color to match your design */
+  background-color: #DAAD86(0, 0, 0, 0.7);  /* Slightly transparent black. Adjust as needed */
+}
+
+nav li:hover ul {
+  display: block;  /* Display dropdown on hover */
+}
+
+nav li ul li {
+  display: block;
+  margin: 0;
+  padding: 5px 10px;  /* Adjust padding for dropdown items */
+  background-color: transparent;  /* No background color for dropdown items */
+}
+
+.bio-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60vh; /* Increasing the height a bit */
+}
+
+.bio-box {
+  background-color: transparent; 
+  padding: 10px;
+  text-align: center;
+  width: 50%;
+  background-color: #DAAD86; /* You can choose a background color if needed. */
+}
+
+.profile-picture {
+  height: 350px;
+  width: 225px;
+  margin-right: 20px;
+  border-radius: 50%; /* Making the image round */
+  border: 3px solid white; /* White border for the image */
+}
+
+footer {
+  background-color: transparent;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.social-media a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #ffffff; 
+}
+
+.experience-container {
+  max-width: 1000px; /* This sets the maximum width of the content. Adjust as needed. */
+  margin: 50px auto; /* This centers the container and provides space from the top and bottom. */
+  padding: 20px; /* This adds space between the container edge and the text inside it. */
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1); /* Optional: Adds a slight shadow around the container for distinction */
+  background-color: #DAAD86; /* You can choose a background color if needed. */
+}
+
+.skills-container {
+  display: flex;           /* Uses flexbox to control layout */
+  justify-content: center; /* Horizontally center content */
+  align-items: flex-start; /* Top-align the two columns */
+  max-width: 800px;        /* Max width of the container */
+  margin: 0 auto;          /* Horizontally center the container on the page */
+  gap: 20px;               /* Gap between the columns */
+}
+
+.skills-column {
+  flex: 1;                 /* Each column takes up an equal width */
+  border: 1px solid #000;  /* Adds a border to see the division; optional */
+  padding: 10px;           /* Adds some space inside each column */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Optional shadow for aesthetics */
+  background-color: #DAAD86; /* You can choose a background color if needed. */
+}
+
+.skills-column h3 {
+  text-align: center;      /* Centers the heading */
+}
+
+code {
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  font-family: monospace;
+  font-size: 14px;
+  display: block;
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+.sql {
+  color: #008080;
+}

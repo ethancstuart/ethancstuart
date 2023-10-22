@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ethan Stuart - Home</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+  </head>
+  <body>
+    <header>
+      <h1>Ethan Stuart</h1>
+        <p>Email: ethan.c.stuart@gmail.com</p>
+        <p>Phone: (415) 419-7630</p>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="experience.html">Experience</a></li>
+          <li><a href="education.html">Education & Certificates</a></li>
+          <li><a href="skills.html">Skills</a></li>
+          <li><a href="work_examples.html">Work Examples</a>
+            <ul>
+              <li><a href="sql.html">SQL</a></li>
+              <li><a href="python.html">Python</a></li>
+              <li><a href="excel.html">Excel</a></li>
+            </ul>
+      </nav>
+    </header>
+    <main>
+    <h2>SQL</h2>
+    <section>
+      <h3>Example 1: What is the average order value for each category of products?</h3>
+      <p>Question: As a business owner, you want to know the average order value for each category of products in your store, so you can determine which categories generate the highest revenue.</p>
+      <p>Table: You have two tables: `orders` and `order_items`. The `orders` table contains information about each order, including the `order_id` and the `order_date`. The `order_items` table contains information about each item in each order, including the `order_id`, the `product_id`, the `quantity`, and the `price`.</p>
+      <pre>
+        <code class="sql">
+          SELECT categories.category_name,
+          AVG(order_items.quantity * order_items.price) AS avg_order_value
+          FROM orders
+            JOIN order_items ON orders.order_id = order_items.order_id
+            JOIN products ON order_items.product_id = products.product_id
+            JOIN categories ON products.category_id = categories.category_id
+          GROUP BY categories.category_name
+          ORDER BY avg_order_value DESC;
+        </code>
+      </pre>
+      <p>Analysis: This query joins four tables together and calculates the average order value for each category of products. The `JOIN` clauses join the `orders` table with the `order_items` table on the `order_id` column, the `order_items` table with the `products` table on the `product_id` column, and the `products` table with the `categories` table on the `category_id` column. The `GROUP BY` clause groups the results by the `category_name` column, and the `ORDER BY` clause orders the results in descending order of the average order value. The resulting table shows the average order value for each category of products in descending order, allowing the business owner to identify which categories generate the highest revenue.</p>
+    </section>
+    <section>
+      <h3>Example 2: What is the retention rate for each month?</h3>
+      <p>Question: As a marketer, you want to know the retention rate for each month to determine how many customers are returning to your store over time.</p>
+      <p>Table: You have one table called orders that contains information about each order, including the customer_id and the order_date.</p>
+      <pre>
+        <code class="sql">
+          WITH cohort_table AS ( 
+            SELECT
+              customer_id,
+              DATE_TRUNC('month', MIN(order_date)) AS cohort_month
+            FROM orders
+            GROUP BY customer_id
+          ) 
+          SELECT 
+            cohort_table.cohort_month,
+            DATE_TRUNC('month', orders.order_date) AS order_month, 
+            COUNT(DISTINCT orders.customer_id) / cohort_size AS retention_rate 
+          FROM orders 
+            JOIN cohort_table 
+               ON orders.customer_id = cohort_table.customer_id
+            JOIN ( 
+              SELECT
+                cohort_month,
+                COUNT(DISTINCT customer_id) AScohort_size
+              FROM cohort_table 
+              GROUP BY cohort_month
+          )AS cohort_sizes ONcohort_table.cohort_month = cohort_sizes.cohort_month 
+          GROUP BY cohort_table.cohort_month, order_month, cohort_size
+          ORDER BY cohort_table.cohort_month, order_month;
+        </code>
+      </pre>
+      <p>Analysis: This query calculates the retention rate for each month by creating a cohort table that groups customers by the month of their first order, and then joining this table with the `orders` table to calculate the number of customers who returned in each subsequent month. The `WITH` clause creates the cohort table by selecting the `customer_id` and the month of their first order using the `MIN` function and the `DATE_TRUNC` function to truncate the timestamp to the month. The main query then joins the `orders` table with the cohort table and a subquery that calculates the size of each cohort, and divides the number of customers who returned in each subsequent month by the size of the cohort to calculate the retention rate. The resulting table shows the retention rate for each month by cohort, allowing the marketer to identify trends in customer retention over time.</p>
+      <p>For example, the marketer may find that the retention rate drops off significantly after the first month, indicating that customers are not returning to the store as frequently as the marketer would like. The marketer could then use this information to develop retention strategies, such as targeted marketing campaigns or loyalty programs, to encourage customers to return to the store.</p>
+    </section>
+    <section>
+      <h3>Example 3: What are the top-selling products for each category?</h3>
+      <p>Question: As a business owner, you want to know the top-selling products for each category in your store, so you can determine which products are most popular in each category.</p>
+      <p>Table: You have three tables: orders, order_items, and products. The orders table contains information about each order, including the order_id and the order_date. The order_items table contains information about each item in each order, including the order_id, the product_id, the quantity, and the price. The products table contains information about each product, including the product_id, the product_name, and the category_id.</p>
+      <pre>
+        <code class="sql">
+          SELECT 
+	       categories.category_name,
+	       products.product_name,
+	         SUM(order_items.quantity) AStotal_quantity_sold
+          FROM orders
+          JOIN order_items
+	       ON orders.order_id = order_items.order_id
+          JOIN products
+	       ON order_items.product_id = products.product_id
+          JOIN categories
+	       ON products.category_id = categories.category_id
+          WHERE products.product_id
+          IN (
+	      SELECT
+		    product_id
+	       FROM products
+	       WHERE category_id = categories.category_id
+	       ORDER BY product_id DESC
+	       LIMIT 3
+	        )
+         GROUP BY categories.category_name, products.product_name
+         ORDER BY categories.category_name ASC, total_quantity_sold DESC;
+        </code>
+      </pre>
+      <p>Analysis: This query calculates the top-selling products for each category by joining three tables together and using a nested query to identify the top-selling products for each category. The `JOIN` clauses join the `orders` table with the `order_items` table on the `order_id` column, the `order_items` table with the `products` table on the `product_id` column, and the `products` table with the `categories` table on the `category_id` column. The nested query in the `WHERE` clause selects the top three products for each category by selecting the `product_id` column from the `products` table where the `category_id` matches the `category_id` in the outer query, and then ordering the results in descending order of `product_id` and limiting the results to the top three. The resulting table shows the top-selling products for each category in descending order of the total quantity sold, allowing the business owner to identify which products are most popular in each category.</p>
+    </section>
+  </main>
+<footer>
+  <section>
+  </div>
+  <footer>
+    <p style="text-align:left; padding-left: 3%;">Website built and designed by Ethan Stuart</p>
+    <div style="text-align:center;">
+      <a href="https://github.com/ethancstuart" target="_blank">GitHub</a>
+      <a href="https://twitter.com/ethan1life" target="_blank">Twitter</a>
+      <a href="#" target="_blank">Instagram</a>
+    </div>
+  </footer>
+</body>
+</html>
