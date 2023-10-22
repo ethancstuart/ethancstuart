@@ -1,8 +1,8 @@
 body {
   font-family: Arial, sans-serif;
   font-size: 18px;
-  color: #ffffff;
-  background-color: #8D8741; 
+  color: #000000;
+  background-color: #ffffff; 
 }
 
 header {
@@ -14,7 +14,7 @@ header {
 h1 {
   font-size: 48px; /* Made it larger for emphasis */
   margin-bottom: 10px;
-  color: #ffffff;
+  color: #8d8741;
 }
 
 section {
@@ -24,7 +24,7 @@ section {
 h2 {
   font-size: 24px;
   margin-bottom: 20px;
-  color: #ffffff; /* Light color to contrast with the dark background */
+  color: #659dbd; /* Light color to contrast with the dark background */
 }
 
 /* Navbar base styling */
@@ -53,7 +53,7 @@ nav li {
 
 nav a {
   text-decoration: none;
-  color: white;  /* Adjust to match your design */
+  color: rgb(0, 0, 0);  /* Adjust to match your design */
 }
 
 /* Dropdown styling */
@@ -114,10 +114,10 @@ footer {
 
 .experience-container {
   max-width: 1000px; /* This sets the maximum width of the content. Adjust as needed. */
-  margin: 50px auto; /* This centers the container and provides space from the top and bottom. */
-  padding: 20px; /* This adds space between the container edge and the text inside it. */
+  margin: 0 auto; /* This centers the container. */
+  padding: 0 20px 0px 20px; /* This removes the top padding but retains the right, bottom, and left paddings. */
   box-shadow: 0px 0px 10px rgba(0,0,0,0.1); /* Optional: Adds a slight shadow around the container for distinction */
-  background-color: #DAAD86; /* You can choose a background color if needed. */
+  background-color: #659dbd; /* You can choose a background color if needed. */
 }
 
 .skills-container {
